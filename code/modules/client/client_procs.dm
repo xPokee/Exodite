@@ -463,10 +463,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	if(!tooltips)
 		tooltips = new /datum/tooltip(src)
 
-	if (!interviewee && BC_IsKeyAllowedToConnect(key))
+	if (!interviewee)
 		initialize_menus()
-	else
-		to_chat(usr, "<span class='danger'>You are not currently whitelisted!  Please visit the discord to request whitelisting, or adminhelp for more info.</span>")
 
 	view_size = new(src, getScreenSize(prefs.widescreenpref))
 	view_size.resetFormat()
@@ -911,7 +909,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	..()
 
 /client/proc/add_verbs_from_config()
-	if (interviewee || !BC_IsKeyAllowedToConnect(key))
+	if (interviewee)
 		return
 	if(CONFIG_GET(flag/see_own_notes))
 		add_verb(src, /client/proc/self_notes)
